@@ -1,0 +1,4 @@
+1, Data Preprocessing, 12, 2
+2, Model Training, 30, 1
+3, Hyperparameter Tuning, 20, 3
+4, Inference, 10, 4
