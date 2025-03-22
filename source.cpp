@@ -148,9 +148,10 @@ void executeNextTask() {
     
     // Adaptive Scheduling: Increase Time Slice
     if (currentTask->timesScheduled >= 4)
-        timeSlice *= currentTask->timesScheduled - 2;
+        timeSlice *= (currentTask->timesScheduled - 2);
     
     cout << "Executing Task ID: " << currentTask->taskID << " (" << currentTask->taskType << ")" << endl;
+    cout << "Priority: " << currentTask->priority << endl;
     cout << "Scheduled " << currentTask->timesScheduled << " times before." << endl;
     cout << "Remaining Computation Time: " << currentTask->computationTime << " units" << endl;
     cout << "Allocated Time Slice: " << timeSlice << " units" << endl;
