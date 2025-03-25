@@ -3,7 +3,6 @@
 
 using namespace std;
 
-// Node structure for Priority Queue
 class Node {
 public:
     int taskID;
@@ -16,12 +15,9 @@ public:
     Node(int id, string type, int time, int prio)
         : taskID(id), taskType(type), computationTime(time), priority(prio), timesScheduled(0), next(nullptr) {}
 };
-
-// Priority Queue using Linked List
 class PriorityQueue {
 private:
-    Node* head; // Points to the highest priority task (smallest priority value)
-
+    Node* head; 
 public:
     PriorityQueue() : head(nullptr) {}
 
@@ -64,16 +60,14 @@ public:
         while (head) {
             Node* temp = head;
             head = head->next;
-            delete temp;
+            delete temp; 
         }
     }
 };
 
-// Priority Queue instance
 PriorityQueue taskQueue;
 
-// Custom function to find the position of a delimiter
-size_t custom_find(const string& str, char delimiter) {
+size_t parse_find(const string& str, char delimiter) {
     size_t i;
     for ( i = 0; i < str.size(); ++i) {
         if (str[i] == delimiter) {
@@ -83,8 +77,7 @@ size_t custom_find(const string& str, char delimiter) {
     return i;
 }
 
-// Custom function to extract substring
-string custom_substr(const string& str, size_t start, size_t length) {
+string parse_substr(const string& str, size_t start, size_t length) {
     string result;
     for (size_t i = start; i < start + length && i < str.size(); ++i) {
         result += str[i];
@@ -92,8 +85,7 @@ string custom_substr(const string& str, size_t start, size_t length) {
     return result;
 }
 
-// Custom function to convert string to integer
-int custom_to_int(const string& str) {
+int parse_to_int(const string& str) {
     int num = 0;
     for (char ch : str) {
         if (ch >= '0' && ch <= '9') {
@@ -103,7 +95,6 @@ int custom_to_int(const string& str) {
     return num;
 }
 
-// Function to Add Task from File
 void addTasksFromFile(string filename) {
     ifstream file(filename);
     if (!file) {
@@ -115,19 +106,19 @@ void addTasksFromFile(string filename) {
     string line;
     while (getline(file, line)) {
         size_t pos = 0;
-        pos = custom_find(line, ',');
-        id = custom_to_int(custom_substr(line, 0, pos));
-        line = custom_substr(line, pos + 1, line.size() - pos - 1);
+        pos = parse_find(line, ',');
+        id = parse_to_int(parse_substr(line, 0, pos));
+        line = parse_substr(line, pos + 1, line.size() - pos - 1);
 
-        pos = custom_find(line, ',');
-        type = custom_substr(line, 0, pos);
-        line = custom_substr(line, pos + 1, line.size() - pos - 1);
+        pos = parse_find(line, ',');
+        type = parse_substr(line, 0, pos);
+        line = parse_substr(line, pos + 1, line.size() - pos - 1);
 
-        pos = custom_find(line, ',');
-        time = custom_to_int(custom_substr(line, 0, pos));
-        line = custom_substr(line, pos + 1, line.size() - pos - 1);
+        pos = parse_find(line, ',');
+        time = parse_to_int(parse_substr(line, 0, pos));
+        line = parse_substr(line, pos + 1, line.size() - pos - 1);
 
-        prio = custom_to_int(line);
+        prio = parse_to_int(line);
 
         taskQueue.push(id, type, time, prio);
     }
