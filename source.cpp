@@ -152,7 +152,7 @@ void executeNextTask() {
     
     if (currentTask->computationTime > 0) {
         // Reduce Priority and Reinsert
-        if (currentTask->priority < 6) currentTask->priority++;
+        currentTask->priority++;
         taskQueue.push(currentTask->taskID, currentTask->taskType, currentTask->computationTime, currentTask->priority);
         cout << "Task " << currentTask->taskID << " not completed. Requeuing with new priority " << currentTask->priority << "\n";
     } else {
